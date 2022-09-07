@@ -10,6 +10,7 @@ dotenv.config()
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var userRouter  = require("./routes/user")
 
 //Connection to mongoDB
 // conncet to mongodb
@@ -42,8 +43,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+//Middlewar routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/user', userRouter)
 
 module.exports = app;
