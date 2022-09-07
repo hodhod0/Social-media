@@ -11,6 +11,7 @@ dotenv.config()
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var userRouter  = require("./routes/user")
+var authRouter  = require("./routes/auth")
 
 //Connection to mongoDB
 // conncet to mongodb
@@ -46,6 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Middlewar routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/user', userRouter)
+app.use('/api/users', userRouter)
+app.use("/api/auth",authRouter)
 
 module.exports = app;
