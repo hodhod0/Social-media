@@ -11,7 +11,31 @@ dotenv.config()
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+//Connection to mongoDB
+// conncet to mongodb
+const mongoAtlasUri = process.env.MONGO_DB;
+
+try {
+  // Connect to the MongoDB cluster
+  mongoose.connect(
+    mongoAtlasUri,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => console.log("Mongoose is connected")
+  );
+} catch (e) {
+  console.log("could not connect");
+}
+
+const dbConnection = mongoose.connection;
+dbConnection.on("error", (err) => console.log(`Connection error ${err}`));
+dbConnection.once("open", () => console.log("Connected to DB!"));
+
+
+//Middlewar
 var app = express();
+app.use(express.json());
+app.use(helmet())
+
 
 app.use(logger('dev'));
 app.use(express.json());
